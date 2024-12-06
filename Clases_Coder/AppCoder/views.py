@@ -13,7 +13,7 @@ def profesores(request):
     return HttpResponse("Vista profesores")
 
 def estudiantes(request):
-    return HttpResponse("Vista estudiantes")
+    return render(request,"AppCoder/estudiantes.html")
 
 def entregables(request):
     return HttpResponse("Vista entregables")
