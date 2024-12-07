@@ -20,3 +20,15 @@ def entregables(request):
 
 
 
+from AppCoder.models import Curso
+
+def curso_formulario(request):
+
+    if request.method == 'POST':
+
+        curso = Curso(nombre=request.POST['curso'],camada=request.POST['camada'])
+        curso.save()
+
+        return render(request, "AppCoder/inicio.html")
+
+    return render(request,"AppCoder/curso_formulario.html")
