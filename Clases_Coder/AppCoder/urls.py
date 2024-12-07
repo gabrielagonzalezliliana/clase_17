@@ -11,6 +11,6 @@ urlpatterns = [
     path("entregables/", views.entregables),
     path('curso_formulario/', views.curso_formulario, name="curso_formulario"),
     path('form_con_api/', views.form_con_api, name="form_con_api"),
-    path('buscar-form-con-api/', views.buscar_form_con_api, name="Buscar_Form_Con_Api"),
+    path('buscar-form-con-api/', views.buscar_form_con_api, name="buscar_form_con_api"),
 ]
 
