@@ -6,7 +6,7 @@
 
 {% block main %}
     <!-- En este ejemplo dejamos el action vacío ya que lo manejamos desde la vista -->
-    <form action="" method="POST">
+    <form action="{% url 'buscar_form_con_api' %}" method="POST">
         {% csrf_token %}
         
         <table>

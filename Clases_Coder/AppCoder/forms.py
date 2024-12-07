@@ -5,3 +5,7 @@ class CursoFormulario(forms.Form):
     camada = forms.IntegerField()
 
 
+class BuscaCursoForm(forms.Form):
+    curso = forms.CharField()
+
+
