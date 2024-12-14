@@ -1,0 +1,18 @@
+{% extends 'AppCoder/base.html' %}
+
+{% load static %}
+
+{% block title %} Crear Curso {% endblock title %}
+
+{% block main %}
+    <!-- En este ejemplo dejamos el action vacío ya que lo manejamos desde la vista -->
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Crear">
+
+    </form>
+{% endblock main %}

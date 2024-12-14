@@ -7,7 +7,8 @@ def inicio(request):
     return render(request, "AppCoder/inicio.html")
 
 def cursos(request):
-    return render(request, "AppCoder/cursos.html")
+    cursos = Curso.objects.all()
+    return render (request, "AppCoder/show_courses.html", {"cursos": cursos})
 
 def profesores(request):
     return render(request,"AppCoder/profesores.html")
@@ -70,3 +71,66 @@ def buscar_form_con_api(request):
         mi_formulario = BuscaCursoForm()
 
     return render(request, "AppCoder/buscar_form_con_api.html", {"mi_formulario": mi_formulario})
+
+
+def update_course(request, curso_id):
+    try:
+        curso = Curso.objects.get(id=curso_id)
+    except Curso.DoesNotExist:
+        return render(request, "AppCoder/inicio.html")
+    
+    if request.method == "POST":
+        formulario = CursoFormulario(request.POST)
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            curso.nombre= data["curso"]
+            curso.camada = data["camada"]
+            curso.save()
+            return render(request, "AppCoder/inicio.html")
+
+    formulario = CursoFormulario(
+        initial={
+            "curso": curso.nombre,
+            "camada": curso.camada
+        }
+    )
+    return render(request,"AppCoder/editar_curso.html", {"form": formulario, "curso": curso})
+
+
+
+def delete(request, curso_id):
+    curso_a_borrar = Curso.objects.get(id= curso_id)
+    curso_a_borrar.delete()
+    return render(request, "AppCoder/inicio.html")
+
+
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+class CursoListView (ListView):
+    model = Curso
+    context_object_name = "cursos"
+    template_name = "AppCoder/curso_lista.html"
+
+class CursoDetailView(DetailView):
+    model = Curso
+    template_name = "AppCoder/curso_detalle.html"
+
+class CursoCreateView(CreateView):
+    model = Curso
+    template_name = "AppCoder/curso_crear.html"
+    success_url = reverse_lazy("ListaCursos")
+    fields =["nombre", "camada"]
+
+class CursoUpdateView(UpdateView):
+    model = Curso
+    template_name= "AppCoder/curso_editar.html"
+    success_url = reverse_lazy ("ListaCursos")
+    fields = ["nombre", "camada"]
+
+class CursoDeleteView(DeleteView):
+    model = Curso
+    template_name = "AppCoder/curso_borrar.html"
+    success_url = reverse_lazy("ListaCursos")

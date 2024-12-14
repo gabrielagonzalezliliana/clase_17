@@ -1,0 +1,26 @@
+{% extends "AppCoder/base.html" %}
+
+{% load static %}
+
+{%block title %} Cursos {%endblock title %}
+
+{% block main %}
+    <ul>
+        {% for curso in cursos %}
+        <li> {{ curso.nombre }} | {{ curso.camada }} 
+        <a href="{% url 'ver_curso' curso.pk %}">Ver</a>
+        <a href="{% url 'editar_curso' curso.pk %}">Editar</a>
+        <a href="{% url 'borrar_curso' curso.pk %}">Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+
+
+
+
+
+
+{% endblock main %}
+

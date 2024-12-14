@@ -1,5 +1,5 @@
 from django.contrib import admin
-from AppCoder.models import Curso, Estudiante, Profesor
+from AppCoder.models import Curso, Estudiante, Profesor, Entregable
 
 # Register your models here.
 
@@ -17,3 +17,4 @@ class CursoAdmin (admin.ModelAdmin):
 
 admin.site.register(Estudiante)
 admin.site.register(Profesor)
+admin.site.register(Entregable)

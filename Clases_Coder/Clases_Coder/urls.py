@@ -22,5 +22,5 @@ from AppCoder import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path( "AppCoder/", include ("AppCoder.urls"))
+    path( "", include ("AppCoder.urls"))
 ]
