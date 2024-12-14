@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 from django.http import HttpResponse
@@ -109,7 +111,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-class CursoListView (ListView):
+class CursoListView (LoginRequiredMixin,ListView):
     model = Curso
     context_object_name = "cursos"
     template_name = "AppCoder/curso_lista.html"
