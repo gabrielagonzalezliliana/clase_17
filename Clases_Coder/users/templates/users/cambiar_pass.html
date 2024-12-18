@@ -1,0 +1,21 @@
+{% extends 'AppCoder/base.html' %}
+
+{% load static %}
+
+{% block title %} Login {% endblock title %}
+
+{% block main %}
+    
+    <h1>Cambiar Passwd</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Actualizar">
+
+    </form>
+
+{% endblock main %}

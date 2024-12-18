@@ -44,5 +44,49 @@ def register(request):
 
     form = UserRegisterForm()     
     return render(request,"users/registro.html" ,  {"form":form, "msg_register": msg_register})
-        
+
+
+
+from django.contrib.auth.decorators import login_required
+from users.forms import UserEditForm
  
+# Vista de editar el perfil
+# Obligamos a loguearse para editar los datos del usuario activo
+@login_required
+def editar_perfil(request):
+
+    # El usuario para poder editar su perfil primero debe estar logueado.
+    # Al estar logueado, podremos encontrar dentro del request la instancia
+    # del usuario -> request.user
+    usuario = request.user
+
+    if request.method == 'POST':
+
+        miFormulario = UserEditForm(request.POST, instance=request.user)
+
+        if miFormulario.is_valid():
+
+            miFormulario.save()
+
+            # Retornamos al inicio una vez guardado los datos
+            return render(request, "AppCoder/inicio.html")
+
+    else:
+        miFormulario = UserEditForm(instance=usuario)
+
+    return render(
+        request,
+        "users/editar_usuario.html",
+        {
+            "mi_form": miFormulario,
+            "usuario": usuario
+        }
+    )
+
+
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+class CambiarPassView(LoginRequiredMixin, PasswordChangeView):
+    template_name = "users/cambiar_pass.html"
+    success_url = reverse_lazy("EditarPerfil")
