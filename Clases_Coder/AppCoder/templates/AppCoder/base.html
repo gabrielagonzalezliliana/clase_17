@@ -54,7 +54,9 @@
 
                         {# DROPDOWN PARA LA CUENTA DE USUARIO #}
                         {% if request.user.is_authenticated %}
-                            <img src="{{request.user.imagen.imagen.url}}" alt="" style="height: 50px;width: 50px;">
+                        
+
+                            <img src="{{request.user.avatar.imagen.url}}" alt="" style="height: 40px;width: 40px;">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ request.user.username }}

@@ -20,8 +20,13 @@ from django.urls import path, include
 from Clases_Coder.views import saludo, dia_hoy, muestra_nombre, probando_template
 from AppCoder import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path( "", include ("AppCoder.urls")),
     path("users/", include("users.urls"))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

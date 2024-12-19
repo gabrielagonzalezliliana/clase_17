@@ -5,6 +5,6 @@ __pycache__/
 # Archivos de pipenv. Sólo dejamos requirements.txt
 Pipfile
 Pipfile.lock
-
+media/** 
 # Deberíamos agregar la base de datos con:
-# db.sqlite3f
+# db.sqlite3
